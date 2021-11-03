@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, UserPasswordActivity.class));
         }else if (item.getItemId() == R.id.lokasi) {
             startActivity(new Intent(this, LokasiActivity.class));
+        }else if (item.getItemId() == R.id.call) {
+            startActivity(new Intent(this, CallCenterActivity.class));
+        }else if (item.getItemId() == R.id.smscenter) {
+            startActivity(new Intent(this, SMSCenterActivity.class));
         }
 
         return true;

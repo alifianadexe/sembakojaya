@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtUserId, edtPassword;
     Button btnLogin;
     TextView txtInfo;
-
+    String sharedPrefFile = "com.adexe.sembakojaya";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword.setText("");
         btnLogin = findViewById(R.id.btnLogin);
         txtInfo = findViewById(R.id.txtInfo);
-        shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
+        shp = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -43,27 +43,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void CheckLogin() {
-        if (shp == null)
-            shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
-
-        String userName = shp.getString("name", "");
-
-        if (userName != null && !userName.equals("")) {
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-    }
 
     public void DoLogin(String userid, String password) {
+        String storedUsername = shp.getString("USERNAME", "secret");
+        String storedPassword = shp.getString("PASSWORD", "secret");
         try {
-            if (password.equals("Android3am")) {
+            if (password.equals(storedPassword) && userid.equals(storedUsername)) {
                 if (shp == null)
                     shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
 
                 shpEditor = shp.edit();
-                shpEditor.putString("name", userid);
+                shpEditor.putString("LOGIN_USERNAME", userid);
                 shpEditor.commit();
 
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);

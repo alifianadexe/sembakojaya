@@ -27,11 +27,10 @@ public class DetailActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.hargaText);
         mFoodImage = findViewById(R.id.foodImageDetail);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            int resId = bundle.getInt("gambar");
-            mFoodImage.setImageResource(resId);
-        }
+
+        int resId = myIntent.getIntExtra("gambar", 0);
+        mFoodImage.setImageResource(resId);
+
         edtUserId.setText("Nama : " + coba);
         edtPassword.setText("Harga : " + jadi);
     }

@@ -1,6 +1,7 @@
 package com.adexe.sembakojaya;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
         return mFoodsData.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mNameText;
         private TextView mPriceText;
         private ImageView mFoodImage;
@@ -49,24 +50,33 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
             mNameText = (TextView)itemView.findViewById(R.id.name);
             mPriceText = (TextView)itemView.findViewById(R.id.price);
             mFoodImage = itemView.findViewById(R.id.foodImage);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Sembako currentFood = mFoodsData.get(getAdapterPosition());
+                    price += currentFood.getPrice();
+                    mTotalPriceText.get().setText("TOTAL = " + String.valueOf(price));
+                }
+            });
+
+            mNameText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Sembako currentFood = mFoodsData.get(getAdapterPosition());
+                    Intent myIntent = new Intent(mContext, DetailActivity.class);
+
+                    myIntent.putExtra("nama", currentFood.getName());
+                    myIntent.putExtra("harga", currentFood.getPrice());
+                    myIntent.putExtra("gambar", currentFood.getImageResource());
+                    mContext.startActivity(myIntent);
+                }
+            });
         }
 
         void bindTo(Sembako currentFood){
             mNameText.setText(currentFood.getName());
             mPriceText.setText(String.valueOf(currentFood.getPrice()));
             mFoodImage.setImageResource(currentFood.getImageResource());
-        }
-
-        @Override
-        public void onClick(View view) {
-            Sembako currentFood = mFoodsData.get(getAdapterPosition());
-            price += currentFood.getPrice();
-            mTotalPriceText.get().setText("TOTAL = " + String.valueOf(price));
-        }
-
-        public void onClickText(View view){
-            System.out.println("Coba Dong");
         }
 
     }

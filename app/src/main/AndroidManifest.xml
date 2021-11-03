@@ -23,6 +23,9 @@
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".UserPasswordActivity"></activity>
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".LokasiActivity"></activity>
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".DetailActivity"></activity>
+        <activity android:theme="@style/Theme.Sembakojaya" android:name=".RegisterActivity"></activity>
+        <activity android:theme="@style/Theme.Sembakojaya" android:name=".CallCenterActivity"></activity>
+        <activity android:theme="@style/Theme.Sembakojaya" android:name=".SMSCenterActivity"></activity>
     </application>
 
 </manifest>
