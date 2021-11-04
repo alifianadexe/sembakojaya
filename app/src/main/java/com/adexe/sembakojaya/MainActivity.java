@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<Sembako> mSembakoData;
     private SembakoAdapter mAdapter;
+    private ArrayList<String> list_barang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private void initializeData() {
         String[] foodsName = getResources().getStringArray(R.array.foods_name);
         String[] foodsPrice = getResources().getStringArray(R.array.foods_price);
+        String[] foodsDescription = getResources().getStringArray(R.array.foods_description);
         TypedArray foodImagesResources =
                 getResources().obtainTypedArray(R.array.foods_images);
         mSembakoData.clear();
         for(int i=0;i<foodsName.length;i++){
-            mSembakoData.add(new Sembako(foodsName[i], Integer.parseInt(foodsPrice[i]), foodImagesResources.getResourceId(i, 0)));
+            mSembakoData.add(new Sembako(foodsName[i], foodsDescription[i], Integer.parseInt(foodsPrice[i]), foodImagesResources.getResourceId(i, 0)));
         }
         foodImagesResources.recycle();
         mAdapter.notifyDataSetChanged();

@@ -31,4 +31,14 @@
         <item>@drawable/img_ayambakarmadu</item>
         <item>@drawable/img_ayamgorengbawangputih</item>
     </array>
+
+    <array name="foods_description">
+        <item>Waww sangat enak</item>
+        <item>Haha ini enak sekali</item>
+        <item>Mantap Joss hehe</item>
+        <item>Sembako termahal yang pernah ada</item>
+        <item>Nice Nice Nice</item>
+        <item>Jos Pakde</item>
+        <item>Gas Gas Gas</item>
+    </array>
 </resources>

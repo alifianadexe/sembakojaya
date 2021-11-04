@@ -4,10 +4,11 @@ public class Sembako {
     private String name;
     private int price;
     private final int imageResource;
-
-    Sembako(String name, int price, int imageResource){
+    private String description;
+    Sembako(String name, String description, int price, int imageResource){
         this.name =name;
         this.price = price;
+        this.description = description;
         this.imageResource = imageResource;
     }
 
