@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -79,14 +82,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickText(View v) {
         TextView txtNama = findViewById(R.id.name);
-        TextView txtHarga = findViewById(R.id.price);
+        TextView txtHarga = findViewById(R.id.hargaText);
+        TextView txtDeskripsi = findViewById(R.id.deskripsi);
 
         Intent myIntent = new Intent(this, DetailActivity.class);
 
         myIntent.putExtra("nama", txtNama.getText());
         myIntent.putExtra("harga", txtHarga.getText());
+        myIntent.putExtra("deskripsi", txtDeskripsi.getText());
         myIntent.putExtra("gambar", R.id.foodImageDetail);
         startActivity(myIntent);
     }
+
+    public void goToPurchaseDetail(View view) {
+        TextView purchaseAmountTv = findViewById(R.id.totalPrice);
+        String purchaseAmount = purchaseAmountTv.getText().toString().split("=")[1].trim();
+        Intent intent = new Intent(this, PembayaranActivity.class);
+        intent.putExtra("purchaseAmount", purchaseAmount);
+        startActivity(intent);
+    }
+
+
 
 }

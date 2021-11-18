@@ -14,5 +14,6 @@ public class Sembako {
 
     String getName() { return name; }
     int getPrice() { return price; }
+    String getDeskripsi() {return description;}
     int getImageResource() { return imageResource; }
 }

@@ -43,12 +43,14 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mNameText;
         private TextView mPriceText;
+        private TextView mDescText;
         private ImageView mFoodImage;
 
         ViewHolder(View itemView) {
             super(itemView);
             mNameText = (TextView)itemView.findViewById(R.id.name);
             mPriceText = (TextView)itemView.findViewById(R.id.price);
+            mDescText = (TextView) itemView.findViewById(R.id.deskripsi);
             mFoodImage = itemView.findViewById(R.id.foodImage);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,6 +70,7 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
                     myIntent.putExtra("nama", currentFood.getName());
                     myIntent.putExtra("harga", currentFood.getPrice());
                     myIntent.putExtra("gambar", currentFood.getImageResource());
+                    myIntent.putExtra("deskripsi", currentFood.getDeskripsi());
                     mContext.startActivity(myIntent);
                 }
             });
@@ -77,6 +80,7 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
             mNameText.setText(currentFood.getName());
             mPriceText.setText(String.valueOf(currentFood.getPrice()));
             mFoodImage.setImageResource(currentFood.getImageResource());
+            mDescText.setText(currentFood.getDeskripsi());
         }
 
     }

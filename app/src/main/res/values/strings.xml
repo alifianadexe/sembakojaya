@@ -3,13 +3,14 @@
     <string name="user_login">User Login</string>
     <string name="user_home">Home</string>
     <string-array name="foods_name">
-        <item>Ayam Kecap Pedas Manis</item>
-        <item>Ayam Goreng Mentega</item>
-        <item>Ayam Goreng Bawang Putih</item>
-        <item>Ayam Teriyaki</item>
-        <item>Ayam Bakar Bumbu Padang</item>
-        <item>Ayam Bakar Madu</item>
-        <item>Ayam Serundeng</item>
+        <item>Sayur - Sayuran</item>
+        <item>Beras</item>
+        <item>Gas LPG</item>
+        <item>Gula</item>
+        <item>Indomie</item>
+        <item>Minyak</item>
+        <item>Susu</item>
+        <item>Telur</item>
     </string-array>
 
     <string-array name="foods_price">
@@ -20,25 +21,28 @@
         <item>10000</item>
         <item>20000</item>
         <item>30000</item>
+        <item>40000</item>
     </string-array>
 
     <array name="foods_images">
-        <item>@drawable/img_ayambakarmadu</item>
-        <item>@drawable/img_ayambakarpadang</item>
-        <item>@drawable/img_ayamgorengbawangputih</item>
-        <item>@drawable/img_ayamteriyaki</item>
-        <item>@drawable/img_ayamserundeng</item>
-        <item>@drawable/img_ayambakarmadu</item>
-        <item>@drawable/img_ayamgorengbawangputih</item>
+        <item>@drawable/sayur</item>
+        <item>@drawable/beras</item>
+        <item>@drawable/gas</item>
+        <item>@drawable/gula</item>
+        <item>@drawable/indomie</item>
+        <item>@drawable/minyak</item>
+        <item>@drawable/susu</item>
+        <item>@drawable/telur</item>
     </array>
 
     <array name="foods_description">
-        <item>Waww sangat enak</item>
-        <item>Haha ini enak sekali</item>
-        <item>Mantap Joss hehe</item>
-        <item>Sembako termahal yang pernah ada</item>
-        <item>Nice Nice Nice</item>
-        <item>Jos Pakde</item>
-        <item>Gas Gas Gas</item>
+        <item>Sayur enak sehat dan bergizi</item>
+        <item>Beras enak bikin kenyang</item>
+        <item>Gas unlimited tanpa habis</item>
+        <item>Gula paling manis seluruh dunia</item>
+        <item>Indomie sedap paling enak</item>
+        <item>Minyak paling murni</item>
+        <item>Susu sehat 5 sempurna</item>
+        <item>Telur ayam pak jannah</item>
     </array>
 </resources>
