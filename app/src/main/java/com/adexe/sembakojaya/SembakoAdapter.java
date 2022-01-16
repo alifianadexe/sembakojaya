@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
         this.mContext = context;
         this.mTotalPriceText = new WeakReference<>(totalPriceText);
     }
+
 
     @Override
     public SembakoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -79,8 +82,10 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
         void bindTo(Sembako currentFood){
             mNameText.setText(currentFood.getName());
             mPriceText.setText(String.valueOf(currentFood.getPrice()));
-            mFoodImage.setImageResource(currentFood.getImageResource());
+//            mFoodImage.setImageResource(currentFood.getImageResource());
             mDescText.setText(currentFood.getDeskripsi());
+            Glide.with(mContext).load("http://i.imgur.com/DvpvklR.png").into(mFoodImage);
+
         }
 
     }
