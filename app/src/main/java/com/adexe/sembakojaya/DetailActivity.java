@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 public class DetailActivity extends AppCompatActivity {
     TextView edtUserId;
     TextView edtPassword;
@@ -25,14 +27,13 @@ public class DetailActivity extends AppCompatActivity {
         int jadi = myIntent.getIntExtra("harga", 0);
         String deskripsi = myIntent.getStringExtra("deskripsi");
 
-
         edtUserId = findViewById(R.id.detail_text);
         edtPassword = findViewById(R.id.hargaText);
         edtDeskripsi = findViewById(R.id.deskripsi_text);
         mFoodImage = findViewById(R.id.foodImageDetail);
 
-        int resId = myIntent.getIntExtra("gambar", 0);
-        mFoodImage.setImageResource(resId);
+        String resId = myIntent.getStringExtra("gambar");
+        Glide.with(this).load(resId).into(mFoodImage);
 
         edtUserId.setText("Nama : " + coba);
         edtPassword.setText("Harga : " + jadi);

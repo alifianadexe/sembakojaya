@@ -92,23 +92,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonObjReq);
-
-//        try {
-//            if (password.equals(storedPassword) && userid.equals(storedUsername)) {
-//                if (shp == null)
-//                    shp = getSharedPreferences("myPreferences", MODE_PRIVATE);
-//
-//                shpEditor = shp.edit();
-//                shpEditor.putString("LOGIN_USERNAME", userid);
-//                shpEditor.commit();
-//
-//                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(i);
-//                finish();
-//            } else
-//                txtInfo.setText("Invalid Credentails");
-//        } catch (Exception ex) {
-//            txtInfo.setText(ex.getMessage().toString());
-//        }
     }
 }

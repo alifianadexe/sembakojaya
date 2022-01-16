@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                            mRecyclerView.setLayoutManager(layoutManager);
                            mAdapter = new
                                    SembakoAdapter(getApplicationContext(), mSembakoData,
-                                   findViewById(R.id.totalPrice));
+                                   findViewById(R.id.totalPrice), findViewById(R.id.listof));
                            mRecyclerView.setAdapter(mAdapter);
                            display();
                        }
@@ -129,8 +129,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void goToPurchaseDetail(View view) {
         TextView purchaseAmountTv = findViewById(R.id.totalPrice);
         String purchaseAmount = purchaseAmountTv.getText().toString().split("=")[1].trim();
+        TextView listofbelanjatv = findViewById(R.id.listof);
+        String listofbelanja = listofbelanjatv.getText().toString();
+
         Intent intent = new Intent(this, PembayaranActivity.class);
+
         intent.putExtra("purchaseAmount", purchaseAmount);
+        intent.putExtra("listOfBelanja", listofbelanja);
+
         startActivity(intent);
     }
 
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 JSONObject object = response.getJSONObject(i);
                                 Log.d("THEBUG", String.valueOf(object));
                                 Sembako datas = new Sembako(
+                                        object.getInt("id"),
                                         object.getString("nama").toString(),
                                         object.getString("deskripsi").toString(),
                                         object.getInt("harga"),
@@ -175,4 +182,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         });
         queue.add(jsonArrayRequest);
     }
+
+
 }

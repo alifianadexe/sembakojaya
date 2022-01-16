@@ -5,13 +5,16 @@ public class Sembako {
     private int price;
     private String imageResource;
     private String description;
-    Sembako(String name, String description, int price, String imageResource){
+    private int id;
+    Sembako(int id, String name, String description, int price, String imageResource){
+        this.id = id;
         this.name =name;
         this.price = price;
         this.description = description;
         this.imageResource = imageResource;
     }
 
+    int getId(){return id;}
     String getName() { return name; }
     int getPrice() { return price; }
     String getDeskripsi() {return description;}
@@ -25,7 +28,7 @@ public class Sembako {
         this.imageResource = imageResource;
     }
 
-
+    public void setId(int id){this.id = id;}
     public void setPrice(int price) {
         this.price = price;
     }

@@ -17,6 +17,17 @@
             android:scaleType="centerCrop" />
 
         <TextView
+            android:id="@+id/alifianadexe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foodImage"
+            android:layout_toRightOf="@+id/name"
+            android:padding="5dp"
+            android:text="id"
+            android:textSize="10sp" />
+
+
+        <TextView
             android:id="@+id/name"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
