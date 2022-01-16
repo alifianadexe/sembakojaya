@@ -30,6 +30,17 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/idku"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/qty"
+            android:layout_marginRight="5dp"
+            android:padding="3dp"
+            android:text="A"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/harga"
             android:layout_toRightOf="@+id/nama"
             android:layout_width="100dp"

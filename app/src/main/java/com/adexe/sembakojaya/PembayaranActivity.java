@@ -1,5 +1,7 @@
 package com.adexe.sembakojaya;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,14 +20,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PembayaranActivity extends AppCompatActivity {
     ListView listView;
@@ -43,36 +48,79 @@ public class PembayaranActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String purchaseAmount = intent.getStringExtra("purchaseAmount");
         String listBelanja = intent.getStringExtra("listOfBelanja");
-        Log.d("THEBUGXXX", listBelanja);
         list_belanja = listBelanja.toString().split(",");
+        listView = (ListView) findViewById(R.id.list_belanjaan);
+
         for (String part : list_belanja) {
             getProductDetail(part);
         }
 
         TextView purchaseAmountTv = findViewById(R.id.purchaseAmount);
+        TextView kembaliantv = findViewById(R.id.textView18);
         purchaseAmountTv.setText(purchaseAmount);
         EditText edtPaymentAmount = findViewById(R.id.editTextNumber);
+
+        edtPaymentAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int harga =  parseInt(editable.toString()) - parseInt(purchaseAmount);
+                kembaliantv.setText(harga + "");
+            }
+        });
     }
 
     public void changePaymentAmount() {
         Intent intent = getIntent();
-        Integer purchaseAmount = Integer.parseInt(intent.getStringExtra("purchaseAmount")) ;
+        Integer purchaseAmount = parseInt(intent.getStringExtra("purchaseAmount")) ;
         EditText edtPaymentAmount = findViewById(R.id.editTextNumber);
         TextView returnAmountText = findViewById(R.id.textView18);
         if(edtPaymentAmount.getText().toString().equals("") || edtPaymentAmount.getText().toString().equals("0")) {
             return;
         }
-        Integer paymentAmount = Integer.parseInt(edtPaymentAmount.getText().toString());
+        Integer paymentAmount = parseInt(edtPaymentAmount.getText().toString());
         Integer returnAmount = paymentAmount - purchaseAmount;
         returnAmountText.setText(returnAmount.toString());
     }
 
     public void finishPurchaseDetail(View view) {
+        TextView totalTrans = findViewById(R.id.purchaseAmount);
         TextView kembalian = findViewById(R.id.textView18);
-        TextView pembayaran = findViewById(R.id.editTextNumber);
+        EditText pembayaran = findViewById(R.id.editTextNumber);
 
-        Toast toast = Toast.makeText(getApplicationContext(),"Total Bayar : Rp. " + kembalian.getText() + " Dengan Kembalian " + pembayaran.getText(),Toast.LENGTH_SHORT);
-        toast.setMargin(50,50);
+        HashMap<String, Object> params = new HashMap();
+        params.put("total_trans", totalTrans.getText().toString());
+        params.put("total_kembalian", kembalian.getText().toString());
+        params.put("total_pembayaran",pembayaran.getText().toString());
+        list_jadi_belanja.add(params);
+        JSONArray arrayku = new JSONArray(list_jadi_belanja);
+        String urlPostTo = url + "?save_post="+String.valueOf(arrayku);
+        Log.d("THEBUGXXX", urlPostTo);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, urlPostTo,
+                null,  new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("THEBUGXXX", String.valueOf(response));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                //TODO: handle failure
+            }
+        });
+
+        Volley.newRequestQueue(this).add(jsonRequest);
+        Toast toast = Toast.makeText(PembayaranActivity.this,"Total Bayar : Rp. " + pembayaran.getText() + " Dengan Kembalian " + kembalian.getText(),Toast.LENGTH_SHORT);
         toast.show();
 
         finish();
@@ -92,14 +140,17 @@ public class PembayaranActivity extends AppCompatActivity {
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("qty", 1);
                             map.put("nama", result.getString("nama"));
+                            map.put("idku", result.getString("id"));
                             map.put("harga", result.getInt("harga"));
                             list_jadi_belanja.add(map);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        String[] from = {"fruitName", "fruitImage", "fruitImagaaaa"};
-                        int to[] = {R.id.qty, R.id.nama, R.id.harga};
-                        SimpleAdapter simpleAdapter = new SimpleAdapter(getApplicationContext(), list_jadi_belanja, R.layout.list_item_belanjaan, from, to);
+                        String[] from = {"qty", "nama", "idku", "harga"};
+                        int to[] = {R.id.qty, R.id.nama, R.id.idku, R.id.harga};
+
+                        SimpleAdapter simpleAdapter = new SimpleAdapter(getApplicationContext(),
+                                list_jadi_belanja, R.layout.list_item_belanjaan, from, to);
                         listView.setAdapter(simpleAdapter);
                     }
                 }, new Response.ErrorListener() {
