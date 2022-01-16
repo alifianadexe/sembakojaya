@@ -84,7 +84,7 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
             mPriceText.setText(String.valueOf(currentFood.getPrice()));
 //            mFoodImage.setImageResource(currentFood.getImageResource());
             mDescText.setText(currentFood.getDeskripsi());
-            Glide.with(mContext).load("http://i.imgur.com/DvpvklR.png").into(mFoodImage);
+            Glide.with(mContext).load(currentFood.getImageResource()).into(mFoodImage);
 
         }
 

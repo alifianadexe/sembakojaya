@@ -75,17 +75,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void initializeData() {
-        String[] foodsName = getResources().getStringArray(R.array.foods_name);
-        String[] foodsPrice = getResources().getStringArray(R.array.foods_price);
-        String[] foodsDescription = getResources().getStringArray(R.array.foods_description);
-        TypedArray foodImagesResources =
-                getResources().obtainTypedArray(R.array.foods_images);
-        mSembakoData.clear();
-        for (int i = 0; i < foodsName.length; i++) {
-            mSembakoData.add(new Sembako(foodsName[i], foodsDescription[i], Integer.parseInt(foodsPrice[i]), foodImagesResources.getResourceId(i, 0)));
-        }
-        foodImagesResources.recycle();
-        mAdapter.notifyDataSetChanged();
+//        String[] foodsName = getResources().getStringArray(R.array.foods_name);
+//        String[] foodsPrice = getResources().getStringArray(R.array.foods_price);
+//        String[] foodsDescription = getResources().getStringArray(R.array.foods_description);
+//        TypedArray foodImagesResources =
+//                getResources().obtainTypedArray(R.array.foods_images);
+//        mSembakoData.clear();
+//        for (int i = 0; i < foodsName.length; i++) {
+//            mSembakoData.add(new Sembako(foodsName[i], foodsDescription[i], Integer.parseInt(foodsPrice[i]), foodImagesResources.getResourceId(i, 0)));
+//        }
+//        foodImagesResources.recycle();
+//        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                         object.getString("nama").toString(),
                                         object.getString("deskripsi").toString(),
                                         object.getInt("harga"),
-                                        1
+                                        object.getString("gambar")
                                 );
                                 mSembakoData.add(datas);
                             } catch (JSONException e) {
