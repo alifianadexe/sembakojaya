@@ -79,37 +79,28 @@ public class PembayaranActivity extends AppCompatActivity {
         });
     }
 
-    public void changePaymentAmount() {
-        Intent intent = getIntent();
-        Integer purchaseAmount = parseInt(intent.getStringExtra("purchaseAmount")) ;
-        EditText edtPaymentAmount = findViewById(R.id.editTextNumber);
-        TextView returnAmountText = findViewById(R.id.textView18);
-        if(edtPaymentAmount.getText().toString().equals("") || edtPaymentAmount.getText().toString().equals("0")) {
-            return;
-        }
-        Integer paymentAmount = parseInt(edtPaymentAmount.getText().toString());
-        Integer returnAmount = paymentAmount - purchaseAmount;
-        returnAmountText.setText(returnAmount.toString());
-    }
-
     public void finishPurchaseDetail(View view) {
         TextView totalTrans = findViewById(R.id.purchaseAmount);
         TextView kembalian = findViewById(R.id.textView18);
         EditText pembayaran = findViewById(R.id.editTextNumber);
 
         HashMap<String, Object> params = new HashMap();
+
+        ArrayList<HashMap<String, Object>> list_sebelum_jadi = list_jadi_belanja;
+
         params.put("total_trans", totalTrans.getText().toString());
         params.put("total_kembalian", kembalian.getText().toString());
         params.put("total_pembayaran",pembayaran.getText().toString());
         list_jadi_belanja.add(params);
+
         JSONArray arrayku = new JSONArray(list_jadi_belanja);
         String urlPostTo = url + "?save_post="+String.valueOf(arrayku);
-        Log.d("THEBUGXXX", urlPostTo);
+
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, urlPostTo,
                 null,  new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("THEBUGXXX", String.valueOf(response));
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -123,7 +114,14 @@ public class PembayaranActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(PembayaranActivity.this,"Total Bayar : Rp. " + pembayaran.getText() + " Dengan Kembalian " + kembalian.getText(),Toast.LENGTH_SHORT);
         toast.show();
 
-        finish();
+        Intent intent = new Intent(this, NotaActivity.class);
+
+        intent.putExtra("purchaseAmount", totalTrans.getText().toString());
+        intent.putExtra("kembalianAmount", kembalian.getText().toString());
+        intent.putExtra("pembayaranAmount", pembayaran.getText().toString());
+        intent.putExtra("listNotaBelanja", list_sebelum_jadi);
+        startActivity(intent);
+
     }
 
     public void getProductDetail(String id_product) {

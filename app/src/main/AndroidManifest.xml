@@ -28,6 +28,7 @@
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".CallCenterActivity"></activity>
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".PembayaranActivity"></activity>
         <activity android:theme="@style/Theme.Sembakojaya" android:name=".SMSCenterActivity"></activity>
+        <activity android:theme="@style/Theme.Sembakojaya" android:name=".NotaActivity"></activity>
     </application>
 
 </manifest>

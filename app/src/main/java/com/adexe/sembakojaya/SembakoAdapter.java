@@ -70,10 +70,8 @@ public class SembakoAdapter extends RecyclerView.Adapter<SembakoAdapter.ViewHold
                 public void onClick(View v) {
                     Sembako currentFood = mFoodsData.get(getAdapterPosition());
                     price += currentFood.getPrice();
-                    Log.d("THEBUGX", listBelanja_str);
                     listBelanja_str += mIdText.getText()  + ",";
 
-                    Log.d("THEBUGX", mIdText.getText().toString());
                     mListofbelanja.get().setText(listBelanja_str);
                     mTotalPriceText.get().setText("TOTAL = " + String.valueOf(price));
                 }
